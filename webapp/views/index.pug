@@ -1,6 +1,7 @@
-doctype html
-html 
-    head 
-        title Troov-er 
-    body 
-        h1 #{title}
+extends layout 
+        
+block content       
+    h1 #{title}
+    ul
+        each object, i in objects 
+            li= object.type
