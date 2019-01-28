@@ -1,54 +1,78 @@
-const express = require('express');
-const path = require('path');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+
+var logger = require('morgan');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+var passport = require('passport');
+var authenticate = require('./authenticate');
+var config = require('./config');
+
+var usersRouter = require('./routes/users');
+
+
+
+
 const mongoose = require('mongoose');
 
 
+const url = config.mongoUrl;
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+    console.log("Connected correctly to server");
+}, (err) => { console.log(err); });
 
 
-// Init app 
-const app = express(); 
+var app = express();
 
-//load view engine => PUG 
+// view engine setup
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
-//Home route 
-app.get('/', function(req,res){
-    let objects =[
-        {
-            id: 1, 
-            type: 'wallet',
-            author: 'Salim',
-            info: "red etc..."
-        },
-        {
-            id: 2, 
-            type: 'Phone',
-            author: 'Salim',
-            info: "iPhone."
-        },
-        {
-            id: 3, 
-            type: 'Keys',
-            author: 'Salim',
-            info: "Keychain with a car that lights up, etc..."
-        }
-    ];
-    res.render('index', {
-        title: "Objets",
-        objects: objects 
-    });
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+
+
+app.use(passport.initialize());
+
+
+
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Routes
+var objectRouter = require('./routes/objectRouter');
+app.use('/objects', objectRouter);
+var usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
+
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-//start server
-app.listen(3000, function(){
-    console.log('Server started on port 3000...')
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
-//connecting mongodb & mongoose 
-const url = 'mongodb://localhost:27017/Troov';
-const connect = mongoose.connect(url);
+module.exports = app;
 
-connect.then((db) =>{
-    console.log('connected coorectly to server');
-})
+
+
+
+
+
