@@ -2,7 +2,8 @@ extends layout
         
 block content       
     h1 #{title}
-    ul
+    ul.list-group
         each object, i in objects 
-            li= object.objet
+            li.list-group-item
+                   a(href="/objects/"+ object._id)= object.objet
     

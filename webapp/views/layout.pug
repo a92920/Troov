@@ -2,9 +2,28 @@ doctype html
 html 
     head 
         title Troov-er 
+        link(rel='stylesheet' href= '/bower_components/bootstrap/dist/css/bootstrap.css')
     body 
+    .container
+        nav.navbar.navbar-expand.navbar-dark.bg-dark
+            a.navbar-brand(href='#') Always expand
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExample02', aria-controls='navbarsExample02', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarsExample02.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item.active
+                        a.nav-link(href='/')
+                            | Home 
+                        span.sr-only (current)
+                    li.nav-item
+                        a.nav-link(href='/objects') Objets
+                    li.nav-item
+                        a.nav-link(href='/objects/add') Ajouter objet 
+                form.form-inline.my-2.my-md-0
+                    input.form-control(type='text', placeholder='Search')
+        .container
         block content
         br 
         hr 
         footer 
-            p Copyright &copy; 2017
+            p Copyright &copy; 2019

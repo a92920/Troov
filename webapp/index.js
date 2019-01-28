@@ -19,7 +19,8 @@ app.set('view engine', 'pug');
 var objectRouter = require('../webapp/routes/objectRouter');
 app.use('/objects', objectRouter);
 
-
+//set public folder 
+app.use(express.static(path.join(__dirname, 'public')));
 
 //start server
 app.listen(3000, function(){

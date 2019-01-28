@@ -43,4 +43,21 @@ objectRouter.route('/add')
     })
 });
 
+objectRouter.route('/:id')
+.get((req,res)=>{
+    Object.findById(req.params.id,(err, objects)=>{
+        res.render('object', {
+            objects: objects
+        });
+    });
+})
+.put((req,res)=>{
+    Object.findById(req.params.id,(err, objects)=>{
+        res.render('edit_article', {
+            objects: objects
+        });
+    });
+});
+
+
 module.exports = objectRouter;

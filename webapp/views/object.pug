@@ -1,0 +1,12 @@
+extends layout 
+        
+block content  
+    h1= objects.objet
+    p Date Perdu: #{objects.date_perdu}
+    p Proprietaire: #{objects.proprio}
+    p Couleur: #{objects.couleur}
+    p Info: #{objects.info}
+    p Etat: #{objects.etat}
+    hr
+    a.btn.btn-default(href='/objects/edit/'+object._id) Edit
+    
