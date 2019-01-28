@@ -1,0 +1,21 @@
+extends layout
+
+block content 
+    h1 #{title}
+        form(method='POST', action='/objects/add')
+            #form-group
+                label Objet:
+                input.form-control(name='objet', type='text')
+                #form-group
+                label Date Perdu:
+                input.form-control(name='date_perdu', type='text')
+                #form-group
+                label Proprietaire:
+                input.form-control(name='proprio', type='text')
+                #form-group
+                label Couleur:
+                input.form-control(name='couleur', type='text')
+            #form-group 
+                label Info: 
+                textarea.form-control(name='info')
+            input.btn.btn-primary(type='submit', value= 'Submit')

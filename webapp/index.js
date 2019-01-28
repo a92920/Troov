@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 
 
@@ -12,33 +13,13 @@ const app = express();
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
 
-//Home route 
-app.get('/', function(req,res){
-    let objects =[
-        {
-            id: 1, 
-            type: 'wallet',
-            author: 'Salim',
-            info: "red etc..."
-        },
-        {
-            id: 2, 
-            type: 'Phone',
-            author: 'Salim',
-            info: "iPhone."
-        },
-        {
-            id: 3, 
-            type: 'Keys',
-            author: 'Salim',
-            info: "Keychain with a car that lights up, etc..."
-        }
-    ];
-    res.render('index', {
-        title: "Objets",
-        objects: objects 
-    });
-});
+
+
+//Object route 
+var objectRouter = require('../webapp/routes/objectRouter');
+app.use('/objects', objectRouter);
+
+
 
 //start server
 app.listen(3000, function(){
