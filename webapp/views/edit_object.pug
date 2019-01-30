@@ -1,0 +1,28 @@
+extends layout
+
+block content 
+    h1 #{title}
+        form(method='POST', action='/objects/edit/'+objects._id)
+            #form-group
+                .container
+                    label Objet:
+                    input.form-control(name='objet', type='text', value=objects.objet)
+                    #form-group
+                    label Date Perdu:
+                    input.form-control(name='date_perdu', type='text', value=objects.date_perdu)
+                    #form-group
+                    label Proprietaire:
+                    input.form-control(name='proprio', type='text',, value=objects.proprio)
+                    #form-group
+                    label Couleur:
+                    input.form-control(name='couleur', type='text',, value=objects.couleur)
+                
+            #form-group 
+                .container
+                    label Info: 
+                    textarea.form-control(name='info')
+                    br
+                input.btn.btn-primary(type='submit', value= 'Submit')
+        
+        form(method='DELETE', action='/objects/edit/'+objects._id)
+            input.btn.btn-danger(type='submit', value= 'Delete')

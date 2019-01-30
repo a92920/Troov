@@ -40,7 +40,7 @@ objectRouter.route('/add')
         }else{
             res.redirect('/objects')
         }
-    })
+    });
 });
 
 objectRouter.route('/:id')
@@ -50,14 +50,55 @@ objectRouter.route('/:id')
             objects: objects
         });
     });
-})
-.put((req,res)=>{
-    Object.findById(req.params.id,(err, objects)=>{
-        res.render('edit_article', {
-            objects: objects
+});
+
+objectRouter.route('/edit/:id')
+.get((req,res)=>{
+    Object.findById(req.params.id,(err,objects)=>{
+        res.render('edit_object', {
+            objects: objects,
+            title:'Edit Object'
         });
     });
+        
+})
+.post((req,res)=>{
+    let objet = {};
+
+    objet.objet = req.body.objet
+    objet.date_perdu = req.body.date_perdu
+    objet.proprio = req.body.proprio
+    objet.info = req.body.info
+    objet.couleur = req.body.couleur
+
+    let query = {_id:req.params.id}
+
+    Object.update(query,objet,(err)=>{
+        if(err){
+            console.log(err);
+            return;
+        }else{
+            res.redirect('/objects')
+        }
+    })
 });
+
+//GET est utiliser ici pour ne PAS faire un client-server, sinon j'aurais utiliser des request AJAX et jquery
+objectRouter.route('/delete/:id')
+.get((req,res,next)=>{
+    Object.findByIdAndRemove(req.params.id)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+        res.redirect('/objects');
+    }, (err) => next(err))
+    .catch((err) => next(err));
+    res.redirect('/objects');
+});
+
+
+
 
 
 module.exports = objectRouter;
