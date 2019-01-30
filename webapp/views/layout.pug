@@ -4,9 +4,9 @@ html
         title Troov-er 
         link(rel='stylesheet' href= '/bower_components/bootstrap/dist/css/bootstrap.css')
     body 
-    .container
+        .container
         nav.navbar.navbar-expand.navbar-dark.bg-dark
-            a.navbar-brand(href='#') Always expand
+            a.navbar-brand(href='#') Troov-er
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExample02', aria-controls='navbarsExample02', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navbarsExample02.collapse.navbar-collapse
@@ -20,8 +20,8 @@ html
                     li.nav-item
                         a.nav-link(href='/objects/add') Ajouter objet 
                 form.form-inline.my-2.my-md-0
-                    input.form-control(type='text', placeholder='Search')
-        .container
+                    li
+                        a(href='/users/logout') Logout
         block content
         br 
         hr 

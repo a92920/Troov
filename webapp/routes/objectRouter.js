@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Object = require('../models/objects');
 const mongoose = require('mongoose');
-
+const authenticate = require('../authenticate');
 const objectRouter = express.Router(); 
 
 //body-parser middleware

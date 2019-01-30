@@ -9,8 +9,19 @@
   "author": "Salim Huneidi",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "install": "^0.12.2",
     "mongoose": "^5.4.6",
+    "npm": "^6.7.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1",
+    "path-to-regexp": "^3.0.0",
     "pug": "^2.0.3"
   }
 }
